@@ -20,24 +20,21 @@ const MonacoFileEditor = () => {
 
   // AWS S3 Client Configuration to interact with Storj
   const s3 = new AWS.S3({
-    endpoint: "https://gateway.storjshare.io", // Storj's S3-compatible endpoint
-    accessKeyId: "jx6qwuaz3mwctdeutksigqqjtxra", // Replace with your Storj Access Key
-    secretAccessKey: "jynjundo5hmpjwlpejarxjm4ljmfqlgq6kzjx4rm5vg6idr2ka7a6", // Replace with your Storj Secret Key
-    region: "AP1", // Your desired region (can be anything for Storj)
-    s3ForcePathStyle: true, // Use path-style URLs for Storj
+    endpoint: "https://gateway.storjshare.io",
+    accessKeyId: "jx6qwuaz3mwctdeutksigqqjtxra",
+    secretAccessKey: "jynjundo5hmpjwlpejarxjm4ljmfqlgq6kzjx4rm5vg6idr2ka7a6",
+    region: "AP1",
+    s3ForcePathStyle: true,
   });
 
-  // Save content to Storj using AWS SDK
   const saveFileToStorj = async () => {
     try {
       const params = {
-        Bucket: "firstbucket", // Replace with your Storj bucket name
-        Key: "secondfile.txt", // File name in Storj bucket
-        // Body: Buffer.from(content), // Convert content to Buffer
+        Bucket: "firstbucket",
+        Key: "secondfile.txt",
         Body: content,
       };
 
-      // Upload file to Storj
       s3.putObject(params, (err, data) => {
         if (err) {
           console.error("Error uploading file to Storj:", err);
@@ -76,7 +73,6 @@ const MonacoFileEditor = () => {
 
   return (
     <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
-      {/* Save Button */}
       <button onClick={saveFileToStorj} style={{ margin: "10px" }}>
         Save to Storj
       </button>
@@ -90,7 +86,7 @@ const MonacoFileEditor = () => {
         language="javascript"
         theme="vs-dark"
         value={content}
-        onChange={(value) => setContent(value)} // Update state with editor content
+        onChange={(value) => setContent(value)}
       />
     </div>
   );
